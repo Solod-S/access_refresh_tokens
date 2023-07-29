@@ -2,11 +2,29 @@ const express = require("express");
 
 const ctrl = require("../../controllers/auth");
 
-const { validateBody, authenticate } = require("../../middlewares");
+const { validateBody, authenticate, passport } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
 
 const router = express.Router();
+
+// google get
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+  // scope то что мы хотим получить назад
+  // срабатывает googleParams
+);
+
+// google callback
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false }),
+  ctrl.googleAuth
+  // не делать сессию
+  // срабатывает gooogleCallback
+);
 
 // signup
 router.post("/register", validateBody(schemas.registerSchema), ctrl.register);

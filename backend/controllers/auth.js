@@ -55,6 +55,26 @@ const login = async (req, res) => {
   });
 };
 
+const googleAuth = async (req, res) => {
+  const { user } = req;
+  const payload = {
+    id: user._id,
+  };
+
+  const accessToken = jwt.sign(payload, ACCES_SECRET_KEY, { expiresIn: "2m" });
+  const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, {
+    expiresIn: "7d",
+  });
+
+  await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
+
+  res.json({
+    user,
+    // accessToken,
+    // refreshToken,
+  });
+};
+
 const refresh = async (req, res) => {
   const { refreshToken: token } = req.body;
   try {
@@ -111,4 +131,5 @@ module.exports = {
   refresh: ctrlWrapper(refresh),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
+  googleAuth: ctrlWrapper(googleAuth),
 };

@@ -1,7 +1,8 @@
-const validateBody = require("./validateBody")
-const authenticate = require("./authenticate")
-
+const validateBody = require("./validateBody");
+const authenticate = require("./authenticate");
+const passport = require("./google-authenticate");
 module.exports = {
-    validateBody,
-    authenticate,
-}
+  validateBody,
+  authenticate,
+  passport,
+};
