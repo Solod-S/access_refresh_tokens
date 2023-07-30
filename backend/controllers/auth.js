@@ -70,8 +70,8 @@ const googleAuth = async (req, res) => {
 
   res.json({
     user,
-    // accessToken,
-    // refreshToken,
+    accessToken,
+    refreshToken,
   });
 };
 

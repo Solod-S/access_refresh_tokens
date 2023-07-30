@@ -1,6 +1,8 @@
 const express = require("express");
 
 const ctrl = require("../../controllers/auth");
+const googleAuth2 = require("../../controllers/google2/googleAuth");
+const googleRedirect2 = require("../../controllers/google2/googleRedirect");
 
 const { validateBody, authenticate, passport } = require("../../middlewares");
 
@@ -25,6 +27,13 @@ router.get(
   // не делать сессию
   // срабатывает gooogleCallback
 );
+
+// google get v2
+router.get("/google2", googleAuth2);
+
+// google callback v2
+
+router.get("/google2/callback", googleRedirect2);
 
 // signup
 router.post("/register", validateBody(schemas.registerSchema), ctrl.register);

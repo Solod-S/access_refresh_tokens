@@ -12,7 +12,6 @@ const googleParams = {
   clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: `${BASE_URL}/api/auth/google/callback`,
   passReqToCallback: true,
-  // передать данные о пользователи
 };
 
 const gooogleCallback = async (
@@ -24,6 +23,7 @@ const gooogleCallback = async (
 ) => {
   try {
     const { email, displayName } = profile;
+    console.log(profile);
 
     const user = await User.findOne({ email });
     if (user) {
