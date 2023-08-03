@@ -1,9 +1,15 @@
 const validateBody = require("./validateBody");
 const authenticate = require("./authenticate");
-const passport = require("./google-authenticate");
+const gpassport = require("./google-authenticate");
+const fPassport = require("./facebook-authenticate");
+const gitPassport = require("./github-authenticate");
+const linkedInpassport = require("./linkedin-authenticate");
 
 module.exports = {
   validateBody,
   authenticate,
-  passport,
+  gpassport,
+  fPassport,
+  gitPassport,
+  linkedInpassport,
 };

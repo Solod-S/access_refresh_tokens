@@ -20,8 +20,13 @@ const LoginPage = () => {
     <div className="container">
       <h2>Login Page</h2>
       <LoginForm onSubmit={onLogin} />
-      <a href={`${REACT_APP_API_URL}/auth/google`}>Login with Google</a>
-      <a href={`${REACT_APP_API_URL}/auth/google2`}>Login with Google 2</a>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <a href={`${REACT_APP_API_URL}/auth/google`}>Login with Google</a>
+        <a href={`${REACT_APP_API_URL}/auth/google2`}>Login with Google 2</a>
+        <a href={`${REACT_APP_API_URL}/auth/facebook`}>Login with Facebook</a>
+        <a href={`${REACT_APP_API_URL}/auth/github`}>Login with GitHub</a>
+        <a href={`${REACT_APP_API_URL}/auth/linkedin`}>Login with LinkedIn</a>
+      </div>
       {status && <p style={{ color: "red" }}>{message}</p>}
     </div>
   );
