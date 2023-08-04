@@ -11,6 +11,7 @@ const {
   fPassport,
   gitPassport,
   linkedInpassport,
+  instagramPassport,
 } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
@@ -18,8 +19,31 @@ const { schemas } = require("../../models/user");
 const router = express.Router();
 
 router.get(
+  "/instagram",
+  // fPassport.authenticate("instagram", { scope: ["email", "profile"] })
+  instagramPassport.authenticate("instagram", { scope: ["user_profile"] })
+  // "instagram"
+  // , {
+  // scope: ["user_profile"],
+  // }
+
+  // scope то что мы хотим получить назад
+  // срабатывает googleParams
+);
+
+// instagram callback
+
+router.get(
+  "/instagram/callback",
+  instagramPassport.authenticate("instagram", { session: false }),
+  ctrl.githubAuth
+  // не делать сессию
+  // срабатывает facebookCallback
+);
+
+router.get(
   "/linkedin",
-  // fPassport.authenticate("facebook", { scope: ["email", "profile"] })
+  // fPassport.authenticate("linkedin", { scope: ["email", "profile"] })
   linkedInpassport.authenticate("linkedin", {
     scope: ["r_emailaddress", "r_liteprofile"],
   })
@@ -27,32 +51,32 @@ router.get(
   // срабатывает googleParams
 );
 
-// google callback
+// linkedin callback
 
 router.get(
   "/linkedin/callback",
   linkedInpassport.authenticate("linkedin", { session: false }),
   ctrl.githubAuth
   // не делать сессию
-  // срабатывает facebookCallback
+  // срабатывает linkedInCallback
 );
 
 router.get(
   "/github",
-  // fPassport.authenticate("facebook", { scope: ["email", "profile"] })
+  // fPassport.authenticate("github", { scope: ["email", "profile"] })
   gitPassport.authenticate("github", { scope: ["email", "profile"] })
   // scope то что мы хотим получить назад
   // срабатывает googleParams
 );
 
-// google callback
+// github callback
 
 router.get(
   "/github/callback",
   gitPassport.authenticate("github", { session: false }),
   ctrl.githubAuth
   // не делать сессию
-  // срабатывает facebookCallback
+  // срабатывает githubCallback
 );
 
 router.get(

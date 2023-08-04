@@ -26,6 +26,7 @@ const LoginPage = () => {
         <a href={`${REACT_APP_API_URL}/auth/facebook`}>Login with Facebook</a>
         <a href={`${REACT_APP_API_URL}/auth/github`}>Login with GitHub</a>
         <a href={`${REACT_APP_API_URL}/auth/linkedin`}>Login with LinkedIn</a>
+        <a href={`${REACT_APP_API_URL}/auth/instagram`}>Login with Instagram</a>
       </div>
       {status && <p style={{ color: "red" }}>{message}</p>}
     </div>
